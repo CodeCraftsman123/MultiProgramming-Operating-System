@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class Phase1testing
+public class Phase1
 {
     private static final char[][] M = new char[100][4];//M->Memory
     private static int IC;
@@ -76,10 +76,10 @@ public class Phase1testing
         {
             for(int j = 0 ; j < 4 ; j++)
             {
-                    if(M[i][j] == '-')
-                        sb.append(" ");
-                    else
-                        sb.append(M[i][j]);
+                if(M[i][j] == '-')
+                    sb.append(" ");
+                else
+                    sb.append(M[i][j]);
             }
         }
         sb.append("\n");
@@ -110,7 +110,7 @@ public class Phase1testing
         for(int k = 0 ; k < M.length ; k++)
             System.out.println(k+":"+Arrays.toString(M[k]));
         System.out.println("-".repeat(83)+"Job Over"+"-".repeat(83));
-        Phase1testing.INIT();
+        Phase1.INIT();
         flag1=true;
         buffer = scanner.nextLine();
     }
@@ -121,13 +121,13 @@ public class Phase1testing
         switch(SI)
         {
             case 1:
-                Phase1testing.READ();
+                Phase1.READ();
                 break;
             case 2:
-                Phase1testing.WRITE();
+                Phase1.WRITE();
                 break;
             case 3:
-                Phase1testing.TERMINATE();
+                Phase1.TERMINATE();
                 break;
         }
     }
@@ -182,15 +182,15 @@ public class Phase1testing
                     break;
                 case "GD":
                     SI = 1;
-                    Phase1testing.MOS();
+                    Phase1.MOS();
                     break;
                 case "PD":
                     SI = 2;
-                    Phase1testing.MOS();
+                    Phase1.MOS();
                     break;
                 case "H":
                     SI = 3;
-                    Phase1testing.MOS();
+                    Phase1.MOS();
                     return;
             }
         }
@@ -199,7 +199,7 @@ public class Phase1testing
     private static void STARTEXECUTION()
     {
         IC = 0;
-        Phase1testing.EXECUTEUSERPROGRAM();
+        Phase1.EXECUTEUSERPROGRAM();
     }
 
     private static void LOAD()
@@ -214,7 +214,7 @@ public class Phase1testing
             }
             else if (first4CharOfInputLine.equals("$DTA"))
             {
-                Phase1testing.STARTEXECUTION();
+                Phase1.STARTEXECUTION();
                 flag1 = true;
             }
             if (!flag1)
@@ -277,8 +277,8 @@ public class Phase1testing
         }
 
 
-        Phase1testing.INIT();
-        Phase1testing.LOAD();
+        Phase1.INIT();
+        Phase1.LOAD();
 
         try
         {
