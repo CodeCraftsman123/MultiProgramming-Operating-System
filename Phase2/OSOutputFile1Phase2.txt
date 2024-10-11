@@ -14,7 +14,7 @@ CAT CAN EAT RAT
 RAT                                     
 JOB ID:	302
 	NO ERROR
-IC:	180
+IC:	190
 IR:	[H,  ,  ,  ]
 TTC:	10
 LLC:	2
@@ -22,7 +22,7 @@ LLC:	2
 
 JOB ID:	102
 	INVALID PAGE FAULT
-IC:	142
+IC:	122
 IR:	[L, R, 3, 6]
 TTC:	1
 LLC:	0
@@ -33,7 +33,7 @@ ABCD
 MATCH                                   
 JOB ID:	401
 	TIME LIMIT EXCEEDED
-IC:	151
+IC:	101
 IR:	[P, D, 5, 0]
 TTC:	10
 LLC:	3
@@ -41,7 +41,7 @@ LLC:	3
 
 JOB ID:	1503
 	OPERAND ERROR
-IC:	264
+IC:	294
 IR:	[S, R, 7, A]
 TTC:	3
 LLC:	0
@@ -49,7 +49,7 @@ LLC:	0
 
 JOB ID:	1403
 	OPERATION CODE ERROR(OPCODE ERROR)
-IC:	209
+IC:	39
 IR:	[P, A, 3, 0]
 TTC:	8
 LLC:	0
@@ -57,7 +57,7 @@ LLC:	0
 
 JOB ID:	1403
 	OUT OF DATA
-IC:	191
+IC:	21
 IR:	[G, D, 3, 0]
 TTC:	0
 LLC:	0
@@ -66,7 +66,7 @@ LLC:	0
 SHE SELLS   SEA SHELLS ON               
 JOB ID:	402
 	TIME LIMIT EXCEEDED ERROR AND OPERAND ERROR
-IC:	295
+IC:	5
 IR:	[P, D, 3, F]
 TTC:	4
 LLC:	1
@@ -75,10 +75,18 @@ LLC:	1
 SHE SELLS   SEA SHELLS ON               
 JOB ID:	403
 	TIME LIMIT EXCEEDED ERROR AND OPERATION CODE ERROR(OPCODE ERROR)
-IC:	295
+IC:	185
 IR:	[P, S, 4, 0]
 TTC:	4
 LLC:	1
 
 
 SHE SELLS   SEA SHELLS ON               
+JOB ID:	405
+	TIME LIMIT EXCEEDED
+IC:	24
+IR:	[S, R, 3, 2]
+TTC:	4
+LLC:	1
+
+
