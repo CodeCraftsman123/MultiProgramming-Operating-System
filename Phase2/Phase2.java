@@ -36,6 +36,7 @@ public class Phase2
     private static String opcode;
     private static String operand;
     private static boolean terminateExecution = false;
+    private static boolean onlyTimeLimitHasOccurred = false;
 
 
     private static void INIT()
@@ -63,6 +64,7 @@ public class Phase2
         opcode = operand = "";
 
         pageTablePtrForLoad = pageTablePtrForIC = genericPageTablePtr = 0;
+        onlyTimeLimitHasOccurred = false;
 
     }
 
@@ -159,7 +161,7 @@ public class Phase2
                 sb.append("\tTIME LIMIT EXCEEDED ERROR AND OPERAND ERROR\n");
                 break;
         }
-        if(number == 0 || number == 2 || number == 3)
+        if((number == 0 || number == 2 || number == 3) && !onlyTimeLimitHasOccurred)
             Phase2.SIMULATION();//1 cycle used for termination.
         try
         {
@@ -301,6 +303,11 @@ public class Phase2
             TERMINATE(8);
         else if(TI == 2 && PI ==3)
             TERMINATE(3);
+        else if(TI == 2)//Only TI = 2 it means that Time Limit has occurred and the next Instruction after Time Limit is not GD, PD, H.It means time limit occurred and next instruction is LR, SR, CR, BT(Eg last JOB from Input)
+        {
+            onlyTimeLimitHasOccurred = true;
+            TERMINATE(3);
+        }
     }
 
     private static boolean isNumeric(String number)
