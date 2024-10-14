@@ -331,14 +331,14 @@ public class Phase2
             int RA;
             if (isNumeric(VA))
             {
-                try
+                if(M[pageTablePtrForIC][0] == '1')
                 {
                     frameNo = Integer.parseInt("" + M[pageTablePtrForIC][2] + M[pageTablePtrForIC][3]);
                     pageTablePtrForIC++;
                     RA = frameNo * 10;
                     return RA;
                 }
-                catch (Exception e)
+                else
                 {
                     PI = 3;
                     Phase2.MOS();//Invalid page fault
@@ -357,16 +357,17 @@ public class Phase2
             int frameNo, RA;
             if(isNumeric(VA))
             {
-                try
+                genericPageTablePtr = (pageTableBasePtr + (Integer.parseInt(VA) / 10));
+                if(M[genericPageTablePtr][0] == '1')
                 {
-                    genericPageTablePtr = (pageTableBasePtr + (Integer.parseInt(VA) / 10));
+
                     frameNo = Integer.parseInt(""+M[genericPageTablePtr][2]+M[genericPageTablePtr][3]);
                     RA = ((frameNo * 10) + (Integer.parseInt(VA) % 10));
                     if(opcode.equals("BT"))//adjust indexForIC
                         pageTablePtrForIC = (genericPageTablePtr+1);
                     return RA;
                 }
-                catch(Exception e)//Page fault has occurred, we got **(that's why Integer.parseInt())gave an error
+                else//Page Fault has Occurred
                 {
                     if(opcode.equals("GD") || opcode.equals("SR"))//Valid Page Fault
                     {
