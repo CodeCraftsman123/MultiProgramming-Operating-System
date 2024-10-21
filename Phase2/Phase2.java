@@ -295,7 +295,13 @@ public class Phase2
             TERMINATE(5);
         else if(TI == 0 && PI ==3)
         {
-            TERMINATE(6);
+            if(opcode.equals("GD") || opcode.equals("SR"))//Valid Page Fault
+            {
+                int frameNumber = ALLOCATE();
+                Phase2.UPDATEPAGETABLE(frameNumber);
+                return;
+            }
+            TERMINATE(6);//Invalid page fault
         }
         else if(TI == 2 && PI ==1)
             TERMINATE(7);
@@ -341,7 +347,8 @@ public class Phase2
                 else
                 {
                     PI = 3;
-                    Phase2.MOS();//Invalid page fault
+                    Phase2.MOS();//Invalid Page Fault
+                    PI = -1;
                     return Integer.MIN_VALUE;
                 }
             }
@@ -369,20 +376,16 @@ public class Phase2
                 }
                 else//Page Fault has Occurred
                 {
-                    if(opcode.equals("GD") || opcode.equals("SR"))//Valid Page Fault
-                    {
-                        int frameNumber = ALLOCATE();
-                        Phase2.UPDATEPAGETABLE(frameNumber);
-                        frameNo = Integer.parseInt(""+M[genericPageTablePtr][2]+M[genericPageTablePtr][3]);
-                        RA = ((frameNo * 10) + (Integer.parseInt(VA) % 10));
-                        return RA;
-                    }
-                    else//Invalid Page Fault has occurred
-                    {
                         PI = 3;
-                        Phase2.MOS();//Operand Error
+                        Phase2.MOS();//Check validPageFault or not
+                        PI = -1;
+                        if(!terminateExecution)
+                        {
+                            frameNo = Integer.parseInt(""+M[genericPageTablePtr][2]+M[genericPageTablePtr][3]);
+                            RA = ((frameNo * 10) + (Integer.parseInt(VA) % 10));
+                            return RA;
+                        }
                         return Integer.MIN_VALUE;
-                    }
                 }
             }
             else
